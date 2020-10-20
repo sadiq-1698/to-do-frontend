@@ -1,0 +1,18 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  width : 100%;
+}
+
+.wrapper{
+  margin : 0 auto;
+  max-width : 1284px;
+  background-color: red;
+}
+
+@media screen and (min-width : 320px){
+  
+}
