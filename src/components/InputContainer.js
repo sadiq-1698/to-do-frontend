@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef } from 'react';
 import TodosContext from '../contexts/TodosContext';
 import axios from 'axios';
 
-const HOST = "https://sadiq-1698-todo.glitch.me/";
+const HOST ="http://localhost:3001/";
 
 const InputContainer = () => {
 

@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import ListTile from './ListTile';
 import TodosContext from '../contexts/TodosContext';
 
-
 const ItemContainer = () => {
 
   // use context
@@ -18,7 +17,7 @@ const ItemContainer = () => {
             </div>
           :  
           itemList.map((item, index) => {
-            return <ListTile key={index} itemText={item.item} />
+            return <ListTile key={index} itemText={item.item} itemId={item._id}/>
             }
           )
       }

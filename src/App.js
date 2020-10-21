@@ -5,42 +5,22 @@ import TodosContext  from './contexts/TodosContext';
 import './App.css';
 import axios from 'axios';
 
-const HOST = "https://sadiq-1698-todo.glitch.me/";
+// const HOST = "https://sadiq-1698-todo.glitch.me/";
+const HOST ="http://localhost:3001/";
 
 function App() {
 
   // use state
   const[itemList, setItemList] = useState([]);
+  const[itemID, setItemID] = useState("");
+  const[itemName, setItemName] = useState("");
   const[openModal, setOpenModal] = useState(false);
   const[openEditModal, setOpenEditModal] = useState(true);
 
-  // const updateItem = (id) => {
-  //   axios.put(HOST + 'update', {
-  //     id : id,
-  //     item : editItem
-  //   })
-  //   .then((response) => {
-  //     setEditModalOpen(false);
-  //     const currentItemIndex = itemList.findIndex(item => item._id === id);
-  //     const tempItemList = [...itemList];
-  //     tempItemList[currentItemIndex] = { ...tempItemList[currentItemIndex], item: editItem };
-  //     setItemList([...tempItemList]);
-  //   }, (error) => {
-  //   });
-  // }
-
-  // const deleteItem = (id) => {
-  //   axios.delete(HOST + `delete/${id}`)
-  //   .then((response) => {
-  //     setDeleteModalOpen(false);
-  //     setItemList(itemList.filter(item => item._id !== id))
-  //   }, (error) => {
-  //     console.log(error);
-  //   });;
-  // }
-
+  // provider values
   const providerValues = {
-    itemList, setItemList, openModal, setOpenModal, openEditModal, setOpenEditModal
+    itemList, setItemList, openModal, setOpenModal, openEditModal,
+     setOpenEditModal, itemID, setItemID, itemName, setItemName
   }
 
   // use effect
@@ -53,6 +33,8 @@ function App() {
     };
     fetchItems();
   }, []);
+
+  console.log(itemList);
 
   return (
     <>
