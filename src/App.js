@@ -1,4 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import Header from './components/Header';
+import InputContainer from './components/InputContainer';
+import ItemContainer from './components/ItemContainer';
+import ModalContainer from './components/ModalContainer';
 import './App.css';
 import axios from 'axios';
 
@@ -109,85 +113,5 @@ function App() {
     </>
   );
 }
-
-const Header = () => {
-  return (
-    <div className="header">
-      <h1>To Do App</h1>
-    </div>
-  );
-}
-
-const InputContainer = (props) => {
-
-  return (
-    <div className="input-container">
-      <input 
-        type="text" 
-        className="input-field" 
-        placeholder="Add a new item..."
-      />
-      <button className="add btn" onClick={}>Add</button>
-    </div>
-  );
-}
-
-const ItemContainer = (props) => {
-  const listOfItems = props.listOfItems;
-  return (
-    <div className="items-container">
-      {
-        listOfItems.map((item, index) =>
-          <ListTile key={index}             
-            itemText={item.item}
-            onClickEdit={props.onClickEdit}
-            onClickDelete={props.onClickDelete}>
-          </ListTile>
-        )
-      }
-    </div>
-  );
-}
-
-const ListTile = (props) => {
-    return (
-        <div className="list-tile">
-            <span className="item-text">
-                {props.itemText}
-            </span> 
-            <button onClick={props.onClickEdit} className="edit btn">
-              <i className="fa fa-edit"></i>
-            </button>
-            <button onClick={props.onClickDelete} className="delete btn">
-              <i className="fa fa-trash"></i>
-            </button>
-        </div>
-    );
-}
-
-const ModalContainer = (props) => {
-  return (
-    <div className={props.showModalContainer ? "modal-container display" : "modal-container"}>
-      <div className={props.showEditModal ? "edit modal display" : "edit modal"}>
-        <h3 style={{textAlign : "center"}}>Edit item</h3>
-        <input type="text" placeholder="item value"/>
-        <div className="btn-container">
-          <button onClick={props.clickModalButtons} className="btn save">Save changes</button>
-          <button onClick={props.clickModalButtons} className="btn cancel">Cancel</button>
-        </div>
-      </div>
-      <div className={props.showDeleteModal ? "delete modal display" : "delete modal"}>
-          <h3 style={{textAlign : "center"}}>Delete item?</h3>
-          <span style={{textAlign : "center", color : "grey"}}>the item</span>
-          <div className="btn-container">
-            <button onClick={props.clickModalButtons} className="btn yes">Yes</button>
-            <button onClick={props.clickModalButtons} className="btn no">No</button>
-        </div>            
-      </div>
-    </div>
-  );
-}
-
-
 
 export default App;
