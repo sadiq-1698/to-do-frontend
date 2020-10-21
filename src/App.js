@@ -5,8 +5,7 @@ import TodosContext  from './contexts/TodosContext';
 import './App.css';
 import axios from 'axios';
 
-// const HOST = "https://sadiq-1698-todo.glitch.me/";
-const HOST ="http://localhost:3001/";
+const HOST = "https://sadiq-1698-todo.glitch.me/";
 
 function App() {
 
@@ -33,8 +32,6 @@ function App() {
     };
     fetchItems();
   }, []);
-
-  console.log(itemList);
 
   return (
     <>

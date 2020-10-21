@@ -7,24 +7,22 @@ const HOST ="http://localhost:3001/";
 const EditModal = (props) => {
 
     // use context
-    const {itemList, setItemList, itemName, setItemName, itemID} = useContext(TodosContext); 
+    const {itemList, setItemList, itemName, setItemName, itemID, setOpenModal} = useContext(TodosContext); 
 
     // helper functions
     const updateItem = () => {
-        console.log(itemName);
-        console.log(itemID);
-        //     axios.put(HOST + 'update', {
-        //     id : itemID,
-        //     item : itemName
-        // }).then((response) => {
-        //     console.log(response);
-        //     const currentItemIndex = itemList.findIndex(item => item._id === itemID);
-        //     const tempItemList = [...itemList];
-        //     tempItemList[currentItemIndex] = { ...tempItemList[currentItemIndex], item: itemName };
-        //     setItemList([...tempItemList]);
-        //     }, (error) => {
-        //         console.log(error);
-        // });
+        axios.put(HOST + 'update', {
+            id : itemID,
+            item : itemName
+        }).then((response) => {
+            console.log(response);
+            const currentItemIndex = itemList.findIndex(item => item._id === itemID);
+            const tempItemList = [...itemList];
+            tempItemList[currentItemIndex] = { ...tempItemList[currentItemIndex], item: itemName };
+            setItemList([...tempItemList]);
+        }, (error) => {
+            console.log(error);
+        });
     }
 
     return (
@@ -37,9 +35,8 @@ const EditModal = (props) => {
           onChange={(event) => setItemName(event.target.value)}
         />
         <div className="btn-container">
-            <button onClick={updateItem()}>wtf</button>
-          {/* <button  onClick={() => updateItem(props.itemId)} className="btn save">Save changes</button> */}
-          <button className="btn cancel">Cancel</button>
+          <button  onClick={updateItem} className="btn save">Save changes</button>
+          <button  onClick={() => setOpenModal(false)} className="btn cancel">Cancel</button>
         </div>
       </div>
     );

@@ -13,7 +13,7 @@ const ItemContainer = () => {
       {
           itemList.length === 0 ? 
             <div>
-              <h1 style={{textAlign : "center"}}>Loading...</h1>
+              <h1 style={{textAlign : "center"}}>No items...</h1>
             </div>
           :  
           itemList.map((item, index) => {
