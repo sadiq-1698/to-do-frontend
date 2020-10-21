@@ -1,8 +1,6 @@
 import React, {useState, useEffect } from 'react';
-import Header from './components/Header';
-import InputContainer from './components/InputContainer';
-import ItemContainer from './components/ItemContainer';
 import ModalContainer from './components/ModalContainer';
+import TodoContainer from './components/TodoContainer';
 import TodosContext  from './contexts/TodosContext';
 import './App.css';
 import axios from 'axios';
@@ -11,19 +9,9 @@ const HOST = "https://sadiq-1698-todo.glitch.me/";
 
 function App() {
 
-  const[showModalContainer, setShowModalContainer] = useState(false);
-  const[showEditModal, setShowEditModal] = useState(false);
-  const[showDeleteModal, setShowDeleteModal] = useState(false);
+
   const[itemList, setItemList] = useState([]);
-
-
-  // const[editItem, setEditItem] = useState("");
-  // const[editModalOpen, setEditModalOpen] = useState(false);
-  // const[deleteModalOpen, setDeleteModalOpen] = useState(false);
-  // const[itemID, setItemID] = useState("");
   
-
-
   // const updateItem = (id) => {
   //   axios.put(HOST + 'update', {
   //     id : id,
@@ -60,50 +48,15 @@ function App() {
     fetchItems();
   }, []);
 
-  const onClickEditButton = () => {
-    setShowModalContainer(true);
-    setShowEditModal(true);
-    setShowDeleteModal(false);
-  }
-
-  const onClickDeleteButton = () => {
-    setShowModalContainer(true);
-    setShowDeleteModal(true);    
-    setShowEditModal(false);
-  }
-
-  const onClickModalButtons = () => {
-    setShowModalContainer(false);
-    setShowDeleteModal(false);    
-    setShowEditModal(false);
-  }
-
   return (
     <>
       <TodosContext.Provider value={{itemList, setItemList}}>
-        <ModalContainer 
-          showModalContainer={showModalContainer}
-          showEditModal={showEditModal}
-          showDeleteModal={showDeleteModal}
-          clickModalButtons={onClickModalButtons}
-        />
-
-        <div className="wrapper">
-
-          <Header />
-
-          <InputContainer />
-
-          <ItemContainer 
-            listOfItems={itemList}
-            onClickEdit={onClickEditButton}
-            onClickDelete={onClickDeleteButton}
-          />
-
-        </div>
+        <ModalContainer />
+        <TodoContainer />
       </TodosContext.Provider>
     </>
   );
 }
+
 
 export default App;

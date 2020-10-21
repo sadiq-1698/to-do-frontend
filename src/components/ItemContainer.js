@@ -17,12 +17,15 @@ const ItemContainer = (props) => {
               <h1 style={{textAlign : "center"}}>Loading...</h1>
             </div>
           :  
-          itemList.map((item, index) => 
-            <ListTile key={index}             
+          itemList.map((item, index) => {
+            console.log(index);
+            return <ListTile key={index}             
               itemText={item.item}
               onClickEdit={props.onClickEdit}
               onClickDelete={props.onClickDelete}>
             </ListTile>
+          }
+            
         )
       }
     </div>
