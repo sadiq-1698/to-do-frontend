@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ListTile = (props) => {
+
     return (
         <div className="list-tile">
             <span className="item-text">

@@ -3,10 +3,10 @@ import ListTile from './ListTile';
 import TodosContext from '../contexts/TodosContext';
 
 
-const ItemContainer = (props) => {
+const ItemContainer = () => {
 
   // use context
-  const {itemList}   = useContext(TodosContext);
+  const { itemList }   = useContext(TodosContext);
 
   // component
   return ( 
@@ -18,15 +18,9 @@ const ItemContainer = (props) => {
             </div>
           :  
           itemList.map((item, index) => {
-            console.log(index);
-            return <ListTile key={index}             
-              itemText={item.item}
-              onClickEdit={props.onClickEdit}
-              onClickDelete={props.onClickDelete}>
-            </ListTile>
-          }
-            
-        )
+            return <ListTile key={index} itemText={item.item} />
+            }
+          )
       }
     </div>
   );

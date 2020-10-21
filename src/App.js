@@ -9,9 +9,11 @@ const HOST = "https://sadiq-1698-todo.glitch.me/";
 
 function App() {
 
-
+  // use state
   const[itemList, setItemList] = useState([]);
-  
+  const[openModal, setOpenModal] = useState(false);
+  const[openEditModal, setOpenEditModal] = useState(true);
+
   // const updateItem = (id) => {
   //   axios.put(HOST + 'update', {
   //     id : id,
@@ -37,6 +39,10 @@ function App() {
   //   });;
   // }
 
+  const providerValues = {
+    itemList, setItemList, openModal, setOpenModal, openEditModal, setOpenEditModal
+  }
+
   // use effect
   useEffect(() => {
     const fetchItems = async() => {
@@ -50,7 +56,7 @@ function App() {
 
   return (
     <>
-      <TodosContext.Provider value={{itemList, setItemList}}>
+      <TodosContext.Provider value={ providerValues }>
         <ModalContainer />
         <TodoContainer />
       </TodosContext.Provider>
