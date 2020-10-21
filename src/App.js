@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect } from 'react';
 import Header from './components/Header';
 import InputContainer from './components/InputContainer';
 import ItemContainer from './components/ItemContainer';
 import ModalContainer from './components/ModalContainer';
+import TodosContext  from './contexts/TodosContext';
 import './App.css';
 import axios from 'axios';
 
@@ -15,21 +16,13 @@ function App() {
   const[showDeleteModal, setShowDeleteModal] = useState(false);
   const[itemList, setItemList] = useState([]);
 
+
   // const[editItem, setEditItem] = useState("");
   // const[editModalOpen, setEditModalOpen] = useState(false);
   // const[deleteModalOpen, setDeleteModalOpen] = useState(false);
   // const[itemID, setItemID] = useState("");
   
-  // const createNewItem = (itemName) => {
-  //   axios.post(HOST + 'insert', {
-  //     item : itemName
-  //   })
-  //   .then((response) => {
-  //     setItemList([response.data, ...itemList])
-  //   }, (error) => {
-  //     console.log(error);
-  //   });
-  // }
+
 
   // const updateItem = (id) => {
   //   axios.put(HOST + 'update', {
@@ -87,29 +80,28 @@ function App() {
 
   return (
     <>
-      <ModalContainer 
-        showModalContainer={showModalContainer}
-        showEditModal={showEditModal}
-        showDeleteModal={showDeleteModal}
-        clickModalButtons={onClickModalButtons}
-      />
-
-      <div className="wrapper">
-
-        <Header />
-
-        <InputContainer 
-          createNewItemFunction={createNewItem}
+      <TodosContext.Provider value={{itemList, setItemList}}>
+        <ModalContainer 
+          showModalContainer={showModalContainer}
+          showEditModal={showEditModal}
+          showDeleteModal={showDeleteModal}
+          clickModalButtons={onClickModalButtons}
         />
 
-        <ItemContainer 
-          listOfItems={itemList}
-          onClickEdit={onClickEditButton}
-          onClickDelete={onClickDeleteButton}
-        />
+        <div className="wrapper">
 
-      </div>
-      
+          <Header />
+
+          <InputContainer />
+
+          <ItemContainer 
+            listOfItems={itemList}
+            onClickEdit={onClickEditButton}
+            onClickDelete={onClickDeleteButton}
+          />
+
+        </div>
+      </TodosContext.Provider>
     </>
   );
 }

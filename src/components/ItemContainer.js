@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ListTile from './ListTile';
+import TodosContext from '../contexts/TodosContext';
+
 
 const ItemContainer = (props) => {
-    const listOfItems = props.listOfItems;
-    return (
-      <div className="items-container">
-        {
-          listOfItems.map((item, index) =>
+
+  // use context
+  const {itemList}   = useContext(TodosContext);
+
+  // component
+  return ( 
+    <div className="items-container">
+      {
+          itemList.length === 0 ? 
+            <div>
+              <h1 style={{textAlign : "center"}}>Loading...</h1>
+            </div>
+          :  
+          itemList.map((item, index) => 
             <ListTile key={index}             
               itemText={item.item}
               onClickEdit={props.onClickEdit}
               onClickDelete={props.onClickDelete}>
             </ListTile>
-          )
-        }
-      </div>
-    );
+        )
+      }
+    </div>
+  );
+    
 }
 
 export default ItemContainer;
