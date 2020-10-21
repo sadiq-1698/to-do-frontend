@@ -1,25 +1,26 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
-// import React, {useState, useEffect} from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
-// const HOST = "https://sadiq-1698-todo.glitch.me/";
+const HOST = "https://sadiq-1698-todo.glitch.me/";
 
 function App() {
 
-  // const[item, setItem] = useState("");
+  const[showModalContainer, setShowModalContainer] = useState(false);
+  const[showEditModal, setShowEditModal] = useState(false);
+  const[showDeleteModal, setShowDeleteModal] = useState(false);
+  const[itemList, setItemList] = useState([]);
+
   // const[editItem, setEditItem] = useState("");
-  // const[itemList, setItemList] = useState([]);
   // const[editModalOpen, setEditModalOpen] = useState(false);
   // const[deleteModalOpen, setDeleteModalOpen] = useState(false);
   // const[itemID, setItemID] = useState("");
   
-  // const createNewItem = () => {
+  // const createNewItem = (itemName) => {
   //   axios.post(HOST + 'insert', {
-  //     item : item
+  //     item : itemName
   //   })
   //   .then((response) => {
-  //     setItem("");
   //     setItemList([response.data, ...itemList])
   //   }, (error) => {
   //     console.log(error);
@@ -51,39 +52,57 @@ function App() {
   //   });;
   // }
 
-  // // use effect
-  // useEffect(() => {
-  //   const fetchItems = async() => {
-  //     const response = await axios(HOST + 'read');
-  //     if(response){
-  //       setItemList(response.data);
-  //     }
-  //   };
-  //   fetchItems();
-  // }, []);
+  // use effect
+  useEffect(() => {
+    const fetchItems = async() => {
+      const response = await axios(HOST + 'read');
+      if(response){
+        setItemList(response.data);
+      }
+    };
+    fetchItems();
+  }, []);
 
-  // const onClickDelete = (id) => {
-  //   setDeleteModalOpen(true);
-  //   setItemID(id);
-  // }
+  const onClickEditButton = () => {
+    setShowModalContainer(true);
+    setShowEditModal(true);
+    setShowDeleteModal(false);
+  }
 
-  // const onClickEdit = (id, name) => {
-  //   setEditModalOpen(true);
-  //   setItemID(id);
-  // }
+  const onClickDeleteButton = () => {
+    setShowModalContainer(true);
+    setShowDeleteModal(true);    
+    setShowEditModal(false);
+  }
 
+  const onClickModalButtons = () => {
+    setShowModalContainer(false);
+    setShowDeleteModal(false);    
+    setShowEditModal(false);
+  }
 
   return (
     <>
-      <ModalContainer />
+      <ModalContainer 
+        showModalContainer={showModalContainer}
+        showEditModal={showEditModal}
+        showDeleteModal={showDeleteModal}
+        clickModalButtons={onClickModalButtons}
+      />
 
       <div className="wrapper">
 
         <Header />
 
-        <InputContainer />
+        <InputContainer 
+          createNewItemFunction={createNewItem}
+        />
 
-        <ItemContainer />
+        <ItemContainer 
+          listOfItems={itemList}
+          onClickEdit={onClickEditButton}
+          onClickDelete={onClickDeleteButton}
+        />
 
       </div>
       
@@ -99,22 +118,33 @@ const Header = () => {
   );
 }
 
-const InputContainer = () => {
+const InputContainer = (props) => {
+
   return (
     <div className="input-container">
-      <input type="text" className="input-field" placeholder="Add a new item..."/>
-      <button className="add btn">Add</button>
-  </div>
+      <input 
+        type="text" 
+        className="input-field" 
+        placeholder="Add a new item..."
+      />
+      <button className="add btn" onClick={}>Add</button>
+    </div>
   );
 }
 
-const ItemContainer = () => {
+const ItemContainer = (props) => {
+  const listOfItems = props.listOfItems;
   return (
     <div className="items-container">
-      <ListTile itemText="FirstItem"/>
-      <ListTile itemText="SecondItem"/>
-      <ListTile itemText="ThirdItem"/>
-      <ListTile itemText="FourthItem"/>
+      {
+        listOfItems.map((item, index) =>
+          <ListTile key={index}             
+            itemText={item.item}
+            onClickEdit={props.onClickEdit}
+            onClickDelete={props.onClickDelete}>
+          </ListTile>
+        )
+      }
     </div>
   );
 }
@@ -125,33 +155,33 @@ const ListTile = (props) => {
             <span className="item-text">
                 {props.itemText}
             </span> 
-            <button className="edit btn">
+            <button onClick={props.onClickEdit} className="edit btn">
               <i className="fa fa-edit"></i>
             </button>
-            <button className="delete btn">
+            <button onClick={props.onClickDelete} className="delete btn">
               <i className="fa fa-trash"></i>
             </button>
         </div>
     );
 }
 
-const ModalContainer = () => {
+const ModalContainer = (props) => {
   return (
-    <div className="modal-container ">
-      <div className="edit modal ">
+    <div className={props.showModalContainer ? "modal-container display" : "modal-container"}>
+      <div className={props.showEditModal ? "edit modal display" : "edit modal"}>
         <h3 style={{textAlign : "center"}}>Edit item</h3>
         <input type="text" placeholder="item value"/>
         <div className="btn-container">
-          <button className="btn save">Save changes</button>
-          <button className="btn cancel">Cancel</button>
+          <button onClick={props.clickModalButtons} className="btn save">Save changes</button>
+          <button onClick={props.clickModalButtons} className="btn cancel">Cancel</button>
         </div>
       </div>
-      <div className="delete modal ">
+      <div className={props.showDeleteModal ? "delete modal display" : "delete modal"}>
           <h3 style={{textAlign : "center"}}>Delete item?</h3>
           <span style={{textAlign : "center", color : "grey"}}>the item</span>
           <div className="btn-container">
-            <button className="btn yes">Yes</button>
-            <button className="btn no">No</button>
+            <button onClick={props.clickModalButtons} className="btn yes">Yes</button>
+            <button onClick={props.clickModalButtons} className="btn no">No</button>
         </div>            
       </div>
     </div>
