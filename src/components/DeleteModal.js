@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import TodosContext from '../contexts/TodosContext';
 import axios from 'axios';
 
-const HOST ="http://localhost:3001/";
+const HOST = "https://sadiq-1698-todo.glitch.me/";
 
 const DeleteModal = () => {
 
@@ -26,7 +26,7 @@ const DeleteModal = () => {
         <span style={{textAlign : "center", color : "grey"}}>{itemName}</span>
         <div className="btn-container">
           <button onClick={deleteItem} className="btn yes">Yes</button>
-          <button onClick={() => setOpenModal(false) } className="btn no">No</button>
+          <button onClick={() => setOpenModal(false)} className="btn no">No</button>
         </div>            
       </div>
     );

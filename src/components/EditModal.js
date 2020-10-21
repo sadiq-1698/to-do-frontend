@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import TodosContext from '../contexts/TodosContext';
 import axios from 'axios';
 
-const HOST ="http://localhost:3001/";
+const HOST = "https://sadiq-1698-todo.glitch.me/";
 
 const EditModal = (props) => {
 
@@ -15,11 +15,11 @@ const EditModal = (props) => {
             id : itemID,
             item : itemName
         }).then((response) => {
-            console.log(response);
             const currentItemIndex = itemList.findIndex(item => item._id === itemID);
             const tempItemList = [...itemList];
             tempItemList[currentItemIndex] = { ...tempItemList[currentItemIndex], item: itemName };
             setItemList([...tempItemList]);
+            setOpenModal(false);
         }, (error) => {
             console.log(error);
         });

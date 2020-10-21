@@ -10,7 +10,7 @@ const HOST = "https://sadiq-1698-todo.glitch.me/";
 function App() {
 
   // use state
-  const[itemList, setItemList] = useState([]);
+  const[itemList, setItemList] = useState(null);
   const[itemID, setItemID] = useState("");
   const[itemName, setItemName] = useState("");
   const[openModal, setOpenModal] = useState(false);
