@@ -66,25 +66,36 @@ body {
 .modal-container .modal{
   background-color: var(--white);
   border-radius: 8px;
-  padding : 1rem;
-  height : 200px;
-  width : 250px;
+  width : 90%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   display: none;
 }
 
+.modal-container .modal h3{
+  margin-top : 0;
+  height : 50px;
+  background-color: grey;
+  line-height: 50px;
+}
+
+.modal-container .modal input{
+  width : 90%;
+  margin: 0 auto;
+  margin-top : 1rem;
+}
+
 .modal-container .modal .btn-container{
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 1rem;
 }
 
 .modal-container .modal .btn-container .btn{
   padding-left : 1rem;
   padding-right: 1rem;
+  flex : 1;
 }
 
 .modal-container .modal .btn-container .btn.save{
@@ -104,18 +115,36 @@ body {
 }
 
 .modal-container .modal .btn-container .btn{
-  height : 30px;
-  border-radius: 4px;
+  height : 50px;
+  font-weight : bold;
 }
 
 .modal-container .modal input{
   height : 40px;
   padding-left: 0.5rem;
   outline : none;
-  border : none;
+  border : 2px solid var(--blue);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   font-family: var(--font-family);
 }
+
+.modal-container .modal span{
+  height : 40px;
+  padding-left: 0.5rem;
+  outline : none;
+  font-family: var(--font-family);
+  margin-top : 1rem;
+  margin-bottom: 0;
+  line-height: 40px;
+  font-size : 20px;
+  font-weight : bold;
+}
+
+.modal-container .modal.delete h3{
+  background-color: #ff6666;
+  color: var(--white);
+}
+
 
 .btn {
   outline: none;
