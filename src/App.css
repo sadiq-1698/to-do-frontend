@@ -233,3 +233,9 @@ body {
     background-color: var(--red);
   }
 }
+
+@media screen and (min-width: 501px) {
+  .modal-container .modal{
+    width : 30%;
+  }
+}
