@@ -238,4 +238,58 @@ body {
   .modal-container .modal{
     width : 30%;
   }
+  .register {
+    width : 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .register .register-form-container{
+    margin-top: 1rem;
+    padding : 0.5rem;
+    padding-top : 2rem;
+    background-color: var(--white);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width : 30%;
+    padding-bottom : 2rem;
+  }
+  .register .register-form-container input{
+    margin-bottom : 0.6rem;
+    border : 2px solid grey;
+    outline: none;
+    font-family: var(--font-family);
+    width : 90%;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 0.4rem;
+  }
+  .register .register-form-container .password{
+    margin-bottom: 1.4rem;
+  }
+  .register .register-form-container button{
+    width : 90%;
+    border : none;
+    outline: none;
+    border-radius: 5px;
+    height: 40px;
+    background-color: #0000e6;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+    color: var(--white);
+    font-family: var(--font-family);
+    font-weight: bold;
+    margin-bottom : 1rem;
+    cursor: pointer;
+    transition: .1s all ease-in;
+  }
+  .register .register-form-container button:hover{
+    box-shadow: none;
+  }
+  .register .register-form-container .message-container{
+    font-size: 14px;
+  }
+  
 }

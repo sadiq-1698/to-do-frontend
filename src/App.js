@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Register from './components/Register';
+import Login from './components/Login';
 import ModalContainer from './components/ModalContainer';
 import TodoContainer from './components/TodoContainer';
 import TodosContext  from './contexts/TodosContext';
@@ -43,22 +44,13 @@ function App() {
         <Header />
         <Switch>
           <Route path="/" exact><Register /></Route>
-          <Route path="/login" exact><LoginPage /></Route>
+          <Route path="/login" exact><Login /></Route>
           <Route path="/todo" exact><TodoContainer /></Route>
         </Switch>
       </TodosContext.Provider>
 
 
     </>
-  );
-}
-
-
-function LoginPage(){
-  return (
-    <div>
-      <h1>Login Page</h1>
-    </div>
   );
 }
 
