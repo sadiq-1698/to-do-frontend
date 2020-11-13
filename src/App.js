@@ -1,7 +1,10 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import Register from './components/Register';
 import ModalContainer from './components/ModalContainer';
 import TodoContainer from './components/TodoContainer';
 import TodosContext  from './contexts/TodosContext';
+import {Route, Switch } from "react-router-dom";
 import './App.css';
 import axios from 'axios';
 
@@ -37,11 +40,26 @@ function App() {
     <>
       <TodosContext.Provider value={ providerValues }>
         <ModalContainer />
-        <TodoContainer />
+        <Header />
+        <Switch>
+          <Route path="/" exact><Register /></Route>
+          <Route path="/login" exact><LoginPage /></Route>
+          <Route path="/todo" exact><TodoContainer /></Route>
+        </Switch>
       </TodosContext.Provider>
+
+
     </>
   );
 }
 
+
+function LoginPage(){
+  return (
+    <div>
+      <h1>Login Page</h1>
+    </div>
+  );
+}
 
 export default App;
