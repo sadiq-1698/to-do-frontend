@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import TodosContext from '../contexts/TodosContext';
 import axios from 'axios';
-
-const HOST = "https://sadiq-1698-todo.glitch.me/";
+import { HOST } from '../constants/constants';
 
 const DeleteModal = () => {
 

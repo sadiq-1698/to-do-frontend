@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import TodosContext from '../contexts/TodosContext';
 import axios from 'axios';
+import { HOST } from '../constants/constants';
 
-const HOST = "https://sadiq-1698-todo.glitch.me/";
 
 const EditModal = (props) => {
 

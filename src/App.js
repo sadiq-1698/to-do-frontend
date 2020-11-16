@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
-import Register from './components/Register';
-import Login from './components/Login';
 import ModalContainer from './components/ModalContainer';
-import TodoContainer from './components/TodoContainer';
+import Routes from './routes/Routes';
 import TodosContext  from './contexts/TodosContext';
-import ProtectedRoute from './routers/ProtectedRoute';
-import {Route, Switch, Link } from "react-router-dom";
 import './App.css';
 import axios from 'axios';
 import AuthContext from './contexts/AuthContext';
-import { APP } from './constants/constants';
-
-const HOST = "https://sadiq-1698-todo.glitch.me/";
+import { LOGGED_IN, HOST } from './constants/constants';
 
 function App() {
 
@@ -22,7 +16,7 @@ function App() {
   const[itemName, setItemName] = useState("");
   const[openModal, setOpenModal] = useState(false);
   const[openEditModal, setOpenEditModal] = useState(true);
-  const[isAuth, setIsAuth] = useState(localStorage.getItem("loggedIn") === "true");
+  const[isAuth, setIsAuth] = useState(localStorage.getItem(LOGGED_IN) === "true");
 
   // provider values
   const providerValues = {
@@ -39,7 +33,7 @@ function App() {
       }
     };
     fetchItems();
-  }, [isAuth]);
+  }, []);
 
 
   return (
@@ -48,24 +42,10 @@ function App() {
         <TodosContext.Provider value={ providerValues }>
           <ModalContainer />
           <Header />
-          <Link to="/profile"/>
-          <Switch>
-            <Route path="/" exact><Register /></Route>
-            <Route path="/login" exact><Login /></Route>
-            <Route path="/todo" exact><TodoContainer /></Route>
-            <ProtectedRoute path="/profile" component={Profile} auth={isAuth}/>
-          </Switch>
+          <Routes />
         </TodosContext.Provider>
       </AuthContext.Provider>
     </>
-  );
-}
-
-const Profile = () => {
-  return (
-    <div>
-      <h1>Profile page!</h1>
-    </div>
   );
 }
 
