@@ -267,7 +267,10 @@ body {
     border-radius: 5px;
     padding-left: 0.4rem;
   }
-  .register .register-form-container .password{
+  .register .register-form-container h2{
+    margin-bottom : 0.6rem;
+  }
+  .register .register-form-container .confirm{
     margin-bottom: 1.4rem;
   }
   .register .register-form-container button{

@@ -6,6 +6,7 @@ const Login = () => {
     return (
         <div className="register login">
             <div className="register-form-container login">
+                <h2>Login</h2>
                 <input 
                     className="username"
                     type="text"

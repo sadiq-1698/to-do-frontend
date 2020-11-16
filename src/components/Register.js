@@ -5,6 +5,7 @@ const Register = () => {
     return (
         <div className="register">
             <div className="register-form-container">
+                <h2>Register</h2>
                 <input 
                     className="username"
                     type="text"
@@ -14,6 +15,11 @@ const Register = () => {
                     className="password"
                     type="password"
                     placeholder="Enter password"
+                />
+                <input 
+                    className="confirm"
+                    type="password"
+                    placeholder="Confirm password"
                 />
                 <button>
                     Sign up
