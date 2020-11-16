@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
-
+import AuthContext from '../contexts/AuthContext';
+import { LOGGED_IN } from '../constants/constants';
 
 const Login = () => {
+
+    const { setIsAuth } = useContext(AuthContext);
+
+    const onLogOut = () => {
+        localStorage.setItem(LOGGED_IN, false);
+        if(localStorage.getItem(LOGGED_IN) === "false") setIsAuth(false);
+    }
+
     return (
         <div className="register login">
             <div className="register-form-container login">
@@ -17,7 +26,7 @@ const Login = () => {
                     type="password"
                     placeholder="Enter password"
                 />
-                <button>
+                <button onClick={()=> onLogOut()}>
                     Sign in
                 </button>
                 <div className="message-container">

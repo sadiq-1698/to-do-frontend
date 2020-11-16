@@ -1,11 +1,22 @@
 import React from 'react';
-import { Route, Switch} from 'react-router-dom';
+import { Route, Redirect} from 'react-router-dom';
 
-const ProtectedRoute = () => {
+const ProtectedRoute = ({auth : isAuth, component : Component, ...rest}) => {
+    
     return (
-        <div>
-            
-        </div>
+        <Route 
+            exact
+            {...rest} 
+            render={(props) => {
+                if(isAuth){
+                    return <Component />;
+                }else{
+                    return(
+                        <Redirect to={ {pathname:"/", state : { from : props.location }} } />
+                    );
+                }
+            }}
+        />
     )
 }
 

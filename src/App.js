@@ -5,9 +5,12 @@ import Login from './components/Login';
 import ModalContainer from './components/ModalContainer';
 import TodoContainer from './components/TodoContainer';
 import TodosContext  from './contexts/TodosContext';
-import {Route, Switch } from "react-router-dom";
+import ProtectedRoute from './routers/ProtectedRoute';
+import {Route, Switch, Link } from "react-router-dom";
 import './App.css';
 import axios from 'axios';
+import AuthContext from './contexts/AuthContext';
+import { APP } from './constants/constants';
 
 const HOST = "https://sadiq-1698-todo.glitch.me/";
 
@@ -19,6 +22,7 @@ function App() {
   const[itemName, setItemName] = useState("");
   const[openModal, setOpenModal] = useState(false);
   const[openEditModal, setOpenEditModal] = useState(true);
+  const[isAuth, setIsAuth] = useState(localStorage.getItem("loggedIn") === "true");
 
   // provider values
   const providerValues = {
@@ -35,22 +39,33 @@ function App() {
       }
     };
     fetchItems();
-  }, []);
+  }, [isAuth]);
+
 
   return (
     <>
-      <TodosContext.Provider value={ providerValues }>
-        <ModalContainer />
-        <Header />
-        <Switch>
-          <Route path="/" exact><Register /></Route>
-          <Route path="/login" exact><Login /></Route>
-          <Route path="/todo" exact><TodoContainer /></Route>
-        </Switch>
-      </TodosContext.Provider>
-
-
+      <AuthContext.Provider value={{isAuth, setIsAuth}}>
+        <TodosContext.Provider value={ providerValues }>
+          <ModalContainer />
+          <Header />
+          <Link to="/profile"/>
+          <Switch>
+            <Route path="/" exact><Register /></Route>
+            <Route path="/login" exact><Login /></Route>
+            <Route path="/todo" exact><TodoContainer /></Route>
+            <ProtectedRoute path="/profile" component={Profile} auth={isAuth}/>
+          </Switch>
+        </TodosContext.Provider>
+      </AuthContext.Provider>
     </>
+  );
+}
+
+const Profile = () => {
+  return (
+    <div>
+      <h1>Profile page!</h1>
+    </div>
   );
 }
 
