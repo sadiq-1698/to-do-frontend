@@ -31,7 +31,7 @@ const Login = () => {
                 </button>
                 <div className="message-container">
                     <span>
-                        Don't have an account? <Link to="/">Sign up</Link>
+                        Don't have an account? <Link to="/register">Sign up</Link>
                     </span>
                 </div>          
             </div>

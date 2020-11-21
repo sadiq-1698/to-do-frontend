@@ -234,7 +234,8 @@ body {
   }
 }
 
-@media screen and (min-width: 501px) {
+
+@media screen and (min-width: 350px) {
   .modal-container .modal{
     width : 30%;
   }
@@ -254,7 +255,7 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width : 30%;
+    width : 85%;
     padding-bottom : 2rem;
   }
   .register .register-form-container input{
@@ -294,5 +295,13 @@ body {
   .register .register-form-container .message-container{
     font-size: 14px;
   }
-  
+
 }
+
+@media screen and (min-width: 501px) {
+  .register .register-form-container{
+    width : 30%;
+  }
+
+}
+

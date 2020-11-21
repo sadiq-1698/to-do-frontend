@@ -12,10 +12,10 @@ const Routes = () => {
 
     return (
         <Switch>
-            <Route path="/" exact><Register /></Route>
+            <Route path="/register" exact><Register /></Route>
             <Route path="/login" exact><Login /></Route>
 
-            <ProtectedRoute path="/todos" component={TodoContainer} auth={isAuth}/>
+            <ProtectedRoute path="/" component={TodoContainer} auth={isAuth}/>
         </Switch>
     )
 }
