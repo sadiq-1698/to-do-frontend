@@ -5,8 +5,7 @@ import Routes from './routes/Routes';
 import TodosContext  from './contexts/TodosContext';
 import './App.css';
 import axios from 'axios';
-import AuthContext from './contexts/AuthContext';
-import { LOGGED_IN, HOST } from './constants/constants';
+import { HOST, ACCESS_TOKEN } from './constants/constants';
 
 function App() {
 
@@ -16,7 +15,6 @@ function App() {
   const[itemName, setItemName] = useState("");
   const[openModal, setOpenModal] = useState(false);
   const[openEditModal, setOpenEditModal] = useState(true);
-  const[isAuth, setIsAuth] = useState(localStorage.getItem(LOGGED_IN) === "true");
 
   // provider values
   const providerValues = {
@@ -27,7 +25,14 @@ function App() {
   // use effect
   useEffect(() => {
     const fetchItems = async() => {
-      const response = await axios(HOST + 'read');
+      const response = await axios(
+        HOST + 'read',
+        { 
+          headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN)
+          }
+        });
       if(response){
         setItemList(response.data);
       }
@@ -38,13 +43,11 @@ function App() {
 
   return (
     <>
-      <AuthContext.Provider value={{isAuth, setIsAuth}}>
         <TodosContext.Provider value={ providerValues }>
           <ModalContainer />
           <Header />
           <Routes />
         </TodosContext.Provider>
-      </AuthContext.Provider>
     </>
   );
 }

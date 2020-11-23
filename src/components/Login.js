@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
-import { LOGGED_IN, ACCESS_TOKEN, LOGIN } from '../constants/constants';
-// import { useAuth } from '../contexts/AppAuthContext';
+import { Link, useLocation, Redirect } from "react-router-dom";
+import { ACCESS_TOKEN, LOGIN } from '../constants/constants';
+import { useUpdateAuth } from '../contexts/AppAuthContext';
 
 const Login = () => {
+
+    const[redirectTo, setRedirectTo] = useState(false);
+
+    const { state } = useLocation();
 
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
 
-    // const isAuth = useAuth();
+    const { login } = useUpdateAuth();
+
+    if(redirectTo){
+        return <Redirect to={state? state.from : '/'} />
+    }
 
     return (
         <div className="register login">
@@ -45,11 +53,6 @@ const Login = () => {
         </div>
     );
 
-    function updateLocalStorage (){
-        localStorage.setItem(LOGGED_IN, true);
-        localStorage.setItem(ACCESS_TOKEN, "bla-bla");
-    }
-
     function onLogin(){
         console.log(username);
         console.log(password);
@@ -58,8 +61,9 @@ const Login = () => {
             password : password
           })
           .then((response) => {
-            console.log(response);
-            updateLocalStorage();
+            sessionStorage.setItem(ACCESS_TOKEN, response.data.Token);
+            login();
+            setRedirectTo(true);
           }, (error) => {
             console.log("Error");
             console.log(error);

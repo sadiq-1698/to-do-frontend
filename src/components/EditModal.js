@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import TodosContext from '../contexts/TodosContext';
 import axios from 'axios';
-import { HOST } from '../constants/constants';
+import { HOST, ACCESS_TOKEN } from '../constants/constants';
 
 
 const EditModal = (props) => {
@@ -14,6 +14,12 @@ const EditModal = (props) => {
         axios.put(HOST + 'update', {
             id : itemID,
             item : itemName
+        },
+        { 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN)
+            }
         }).then((response) => {
             const currentItemIndex = itemList.findIndex(item => item._id === itemID);
             const tempItemList = [...itemList];

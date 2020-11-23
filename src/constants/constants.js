@@ -2,9 +2,9 @@ export const LOGGED_IN = "todo-loggedIn";
 
 export const ACCESS_TOKEN = "todo-access-token";
 
-// export const HOST = "https://sadiq-1698-todo.glitch.me/";
+export const HOST = "https://sadiq-1698-todo.glitch.me/";
 
-export const HOST = "http://localhost:3001/";
+// export const HOST = "http://localhost:3001/";
 
 export const REGISTER = HOST + "users/register";
 

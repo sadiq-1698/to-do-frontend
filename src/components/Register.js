@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { REGISTER } from '../constants/constants';
+import { REGISTER, ACCESS_TOKEN } from '../constants/constants';
 
 const Register = () => {
 
@@ -16,8 +16,9 @@ const Register = () => {
         if(password !== confirm) return alert("Passwords not matching");
         await sendUserDataToServer();
         return alert("Registeration successfull");
-        // <Redirect to={{pathname : '/login'}} />
     }
+
+    console.log(sessionStorage.getItem(ACCESS_TOKEN) != null);
 
     return (
         <div className="register">

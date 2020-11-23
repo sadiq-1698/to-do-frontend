@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import TodosContext from '../contexts/TodosContext';
 import axios from 'axios';
-import { HOST } from '../constants/constants';
+import { HOST, ACCESS_TOKEN } from '../constants/constants';
 
 const DeleteModal = () => {
 
@@ -10,7 +10,13 @@ const DeleteModal = () => {
 
     // helper functions
     const deleteItem = () => {
-        axios.delete(HOST + `delete/${itemID}`)
+        axios.delete(HOST + `delete/${itemID}`,
+        { 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN)
+            }
+        })
         .then((response) => {
             setItemList(itemList.filter(item => item._id !== itemID));
             setOpenModal(false);

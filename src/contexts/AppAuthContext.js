@@ -1,5 +1,5 @@
 import React,{ useState, useContext } from 'react';
-import { LOGGED_IN } from '../constants/constants';
+import { ACCESS_TOKEN } from '../constants/constants';
 
 const AuthContext = React.createContext();
 const UpdateAuthContext = React.createContext();
@@ -17,7 +17,9 @@ export function useUpdateAuth(){
 // context provider function for basket items
 export function AuthProvider({ children }){
 
-    const[isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem(LOGGED_IN) === "true");
+    const[isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem(ACCESS_TOKEN) != null);
+
+    console.log("Context", isLoggedIn);
 
     function login(){
         setIsLoggedIn(true);

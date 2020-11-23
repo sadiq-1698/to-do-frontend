@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from 'react';
 import TodosContext from '../contexts/TodosContext';
 import axios from 'axios';
-import { HOST } from '../constants/constants';
+import { HOST, ACCESS_TOKEN } from '../constants/constants';
 
 const InputContainer = () => {
 
@@ -24,8 +24,11 @@ const InputContainer = () => {
   }
 
   const createNewItem = () => {
-    axios.post(HOST + 'insert', {
-      item : item
+    axios.post(HOST + 'insert', {item : item},{ 
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN)
+      }
     })
     .then((response) => {
       tempArray = itemList;
