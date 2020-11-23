@@ -1,12 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import axios from 'axios';
 import ListTile from './ListTile';
 import DisplayText from './DisplayText';
 import TodosContext from '../contexts/TodosContext';
+import { HOST, ACCESS_TOKEN } from '../constants/constants';
 
 const ItemContainer = () => {
 
   // use context
-  const { itemList }   = useContext(TodosContext);
+  const { itemList, setItemList }   = useContext(TodosContext);
+
+  // use effect
+  useEffect(() => {
+    const fetchItems = async() => {
+      const response = await axios(
+        HOST + 'read',
+        { 
+          headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN)
+          }
+        });
+      if(response){
+        setItemList(response.data);
+      }
+    };
+    fetchItems();
+  }, [setItemList]);
 
   // component
   return ( 

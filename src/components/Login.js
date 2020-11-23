@@ -54,8 +54,6 @@ const Login = () => {
     );
 
     function onLogin(){
-        console.log(username);
-        console.log(password);
         axios.post(LOGIN, {
             username : username,
             password : password
@@ -69,7 +67,6 @@ const Login = () => {
             console.log(error);
           });
     }
-
 
 }
 

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
-import { REGISTER, ACCESS_TOKEN } from '../constants/constants';
+import { REGISTER } from '../constants/constants';
 
 const Register = () => {
 
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
     const[confirm, setConfirm] = useState("");
+    const[redirectTo, setRedirectTo] = useState(false);
 
     const onSignUp = async () => {
         if(password.length === 0 || username.length === 0 || confirm.length === 0) 
@@ -18,7 +19,9 @@ const Register = () => {
         return alert("Registeration successfull");
     }
 
-    console.log(sessionStorage.getItem(ACCESS_TOKEN) != null);
+    if(redirectTo){
+        return <Redirect to='/login' />
+    }
 
     return (
         <div className="register">
@@ -67,7 +70,10 @@ const Register = () => {
             password : password
           })
           .then((response) => {
-            console.log(response.data);
+            if(response.status === 200){
+                console.log(response.data);
+                setRedirectTo(true);
+            }
           }, (error) => {
             console.log("Error");
             console.log(error);

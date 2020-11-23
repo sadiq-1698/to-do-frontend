@@ -4,7 +4,7 @@ import axios from 'axios';
 import { HOST, ACCESS_TOKEN } from '../constants/constants';
 
 
-const EditModal = (props) => {
+const EditModal = () => {
 
     // use context
     const {itemList, setItemList, itemName, setItemName, itemID, setOpenModal} = useContext(TodosContext); 
