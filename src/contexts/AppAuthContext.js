@@ -19,8 +19,6 @@ export function AuthProvider({ children }){
 
     const[isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem(ACCESS_TOKEN) != null);
 
-    console.log("Context", isLoggedIn);
-
     function login(){
         setIsLoggedIn(true);
     }

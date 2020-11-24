@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Loader from './Loader';
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 import { REGISTER } from '../constants/constants';
@@ -9,14 +10,15 @@ const Register = () => {
     const[password, setPassword] = useState("");
     const[confirm, setConfirm] = useState("");
     const[redirectTo, setRedirectTo] = useState(false);
+    const[showLoader, setShowLoader] = useState(false);
 
     const onSignUp = async () => {
         if(password.length === 0 || username.length === 0 || confirm.length === 0) 
             return alert("Fields cannot be empty");
         if(password.length < 8) return alert("Minimum 8 characters");
         if(password !== confirm) return alert("Passwords not matching");
-        await sendUserDataToServer();
-        return alert("Registeration successfull");
+        setShowLoader(true);
+        sendUserDataToServer();
     }
 
     if(redirectTo){
@@ -25,6 +27,9 @@ const Register = () => {
 
     return (
         <div className="register">
+            {
+                showLoader ? <div className="overlay"></div> : null
+            }
             <div className="register-form-container">
 
                 <h2>Register</h2>
@@ -51,7 +56,9 @@ const Register = () => {
                 />
 
                 <button onClick={() => onSignUp()}>
-                    Sign up
+                    {
+                        showLoader ?  <Loader />  : "Sign up"
+                    }
                 </button>
 
                 <div className="message-container">
@@ -79,7 +86,6 @@ const Register = () => {
             console.log(error);
           });
     }
-
 }
 
 export default Register;

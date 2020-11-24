@@ -10,7 +10,9 @@
   --body-color: #f9f9f9;
   --item-text-background: #f2f2f2;
   --white: white;
+  --button-color : #0000e6;
   --font-family: 'Poppins', sans-serif;
+
 }
 
 * {
@@ -32,6 +34,15 @@ body {
 .wrapper {
   margin: 0 auto;
   max-width: 1284px!important;
+}
+
+.overlay {
+  position : fixed;
+  left : 0;
+  top: 0;
+  height : 100vh;
+  width : 100vw;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .modal-container {
@@ -280,7 +291,7 @@ body {
     outline: none;
     border-radius: 5px;
     height: 40px;
-    background-color: #0000e6;
+    background-color: var(--button-color);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
     color: var(--white);
     font-family: var(--font-family);
@@ -288,6 +299,9 @@ body {
     margin-bottom : 1rem;
     cursor: pointer;
     transition: .1s all ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .register .register-form-container button:hover{
     box-shadow: none;

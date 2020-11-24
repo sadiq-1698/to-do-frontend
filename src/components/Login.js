@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Loader from './Loader';
 import axios from 'axios';
 import { Link, useLocation, Redirect } from "react-router-dom";
 import { ACCESS_TOKEN, LOGIN } from '../constants/constants';
@@ -7,11 +8,11 @@ import { useUpdateAuth } from '../contexts/AppAuthContext';
 const Login = () => {
 
     const[redirectTo, setRedirectTo] = useState(false);
-
-    const { state } = useLocation();
-
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
+    const[showLoader, setShowLoader] = useState(false);
+
+    const { state } = useLocation();
 
     const { login } = useUpdateAuth();
 
@@ -21,6 +22,9 @@ const Login = () => {
 
     return (
         <div className="register login">
+            {
+                showLoader ? <div className="overlay"></div> : null
+            }
             <div className="register-form-container login">
 
                 <h2>Login</h2>
@@ -40,7 +44,9 @@ const Login = () => {
                 />
 
                 <button onClick={()=> onLogin()}>
-                    Sign in
+                    {
+                        showLoader ? <Loader /> : "Sign in"
+                    }
                 </button>
 
                 <div className="message-container">
@@ -54,6 +60,7 @@ const Login = () => {
     );
 
     function onLogin(){
+        setShowLoader(true);
         axios.post(LOGIN, {
             username : username,
             password : password
@@ -65,6 +72,7 @@ const Login = () => {
           }, (error) => {
             console.log("Error");
             console.log(error);
+            setShowLoader(false);
           });
     }
 
