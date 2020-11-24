@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Loader from './Loader';
 import axios from 'axios';
 import { Link, useLocation, Redirect } from "react-router-dom";
-import { ACCESS_TOKEN, LOGIN } from '../constants/constants';
+import { LOGIN } from '../constants/constants';
 import { useUpdateAuth } from '../contexts/AppAuthContext';
 
 const Login = () => {
@@ -66,8 +66,7 @@ const Login = () => {
             password : password
           })
           .then((response) => {
-            sessionStorage.setItem(ACCESS_TOKEN, response.data.Token);
-            login();
+            login(response.data.Token);
             setRedirectTo(true);
           }, (error) => {
             console.log("Error");

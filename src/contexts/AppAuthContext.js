@@ -19,11 +19,13 @@ export function AuthProvider({ children }){
 
     const[isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem(ACCESS_TOKEN) != null);
 
-    function login(){
+    function login(accessToken){
+        sessionStorage.setItem(ACCESS_TOKEN, accessToken);
         setIsLoggedIn(true);
     }
 
     function logout(){
+        sessionStorage.removeItem(ACCESS_TOKEN);
         setIsLoggedIn(false);
     }
 
