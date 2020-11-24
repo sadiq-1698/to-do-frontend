@@ -78,7 +78,6 @@ const Register = () => {
           })
           .then((response) => {
             if(response.status === 200){
-                console.log(response.data);
                 setRedirectTo(true);
             }
           }, (error) => {

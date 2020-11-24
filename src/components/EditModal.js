@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import TodosContext from '../contexts/TodosContext';
 import axios from 'axios';
-import { HOST, ACCESS_TOKEN } from '../constants/constants';
+import { HOST, GET_ACCESS_TOKEN } from '../constants/constants';
 
 
 const EditModal = () => {
@@ -18,7 +18,7 @@ const EditModal = () => {
         { 
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN)
+                'Authorization' : 'Bearer ' + GET_ACCESS_TOKEN
             }
         }).then((response) => {
             const currentItemIndex = itemList.findIndex(item => item._id === itemID);

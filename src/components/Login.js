@@ -17,7 +17,7 @@ const Login = () => {
     const { login } = useUpdateAuth();
 
     if(redirectTo){
-        return <Redirect to={state? state.from : '/'} />
+        return <Redirect to={state ? state.from : '/'} />
     }
 
     return (
@@ -69,8 +69,7 @@ const Login = () => {
             login(response.data.Token);
             setRedirectTo(true);
           }, (error) => {
-            console.log("Error");
-            console.log(error);
+            alert("Invalid username/password");
             setShowLoader(false);
           });
     }
