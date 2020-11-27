@@ -1,7 +1,5 @@
 export const ACCESS_TOKEN = "todo-access-token";
 
-export const GET_ACCESS_TOKEN = sessionStorage.getItem(ACCESS_TOKEN);
-
 export const HOST = "https://sadiq-1698-todo.glitch.me/";
 
 export const REGISTER = HOST + "users/register";
