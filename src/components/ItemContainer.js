@@ -24,7 +24,7 @@ const ItemContainer = () => {
       }
     };
     fetchItems();
-  }, []);
+  }, [setItemList]);
 
   // component
   return (
